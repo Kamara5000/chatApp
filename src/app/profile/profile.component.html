@@ -1,1 +1,42 @@
-<p>profile works!</p>
+<div class="card w-25" style="height: 100%;" >
+    <div style="background-color: #009688; width: 100%; height: 80px;">
+        <div style="margin-left: 50px; margin-top: 50px; color: white;">Profile</div> 
+    </div>
+    <div style=" background-color: #E5E5E5; width: 100%;">
+       <div   style="height: 200px; margin-left: 30px; margin-top: 20px; margin-bottom: 20px; border-radius: 100px; width: 200px;">
+        <img  src="{{profile.img}}" style="height: 200px; border-radius: 100px; width: 200px;">
+       </div>
+    </div>
+    <div>
+
+        <table class="table table-hover table-sm">
+            <tbody>
+                <tr><td>Your name</td> <td>{{profile.fullName}}</td></tr>
+                <tr><td>Username</td><td>{{profile.userName}}</td></tr>
+                <tr class="bg-success"><td>Phone number</td><td>{{profile.phone}}</td></tr>
+                <tr><td>Address</td><td>{{profile.address}}</td></tr>
+                <tr><td>Email</td><td>{{profile.email}}</td></tr>
+                <tr class="bg-light"><td>Bio</td><td>be kind </td></tr>
+            </tbody>
+        </table>
+        <!-- <ul style="list-style-type: none;">
+            <li>your name <br> <u>{{profile.fullName}}</u><br></li>
+            <li>your Username<br> <u>{{profile.userName}}</u><br></li>
+            <li>phone number<br> <u>{{profile.phone}}</u><br></li>
+            <li> Address<br> <u>{{profile.address}}</u><br></li>
+            <li>Email<br> <u>{{profile.address}}</u></li>
+        </ul> -->
+        
+        
+        
+       
+        
+    </div>
+    <!-- <div style=" background-color: #E5E5E5; width: 100%;">
+            <table class="table table-stripped table-sm">
+                <tbody>
+                    <tr><td>bio</td><td>be kind </td></tr>
+                </tbody>
+            </table>
+    </div> -->
+</div>

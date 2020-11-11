@@ -116,8 +116,8 @@ export class ChatPageComponent implements OnInit {
   }
 
 
-  profile(){
-    this.router.navigate([`/profile`])
+  profile(p){
+    this.router.navigate([`/profile/${p.phone}`])
   }
 
 
