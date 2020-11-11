@@ -1,0 +1,56 @@
+<div class="row">
+    <div class="col-12">
+        <div class="row">
+            <div style="background-color:#EFEFEF; width:100%; height:50px">
+                <div style="margin: 5px;">
+                   <span (click)="profile(active.phone)"><img style="height: 40px; border-radius: 25px; width: 40px;" src="assets/ziyech.jpg" /></span>
+                    {{active.fullName}}
+                    <br><p  class="text-muted" style="margin-left: 50px; font-size: 10px; margin-top: -15px;">{{active.phone}}</p>
+                    
+                    <div style="margin-left: 400px; margin-top: -55px;" *ngIf="display" >
+                        <img (click)="profile(friend.phone)" style="height: 40px; border-radius: 25px; width: 40px;" src="{{imgPath}}" />
+                        {{friend.fullName}}
+                        <br><p  class="text-muted" style="margin-left: 50px; font-size: 10px; margin-top: -15px;">{{friend.phone}}</p>
+                    </div>
+                   
+                </div>
+            </div>
+            <div class="col-12" style="height: 82vh">
+            
+                    <div class="row col-12 p-3">
+                        <div class="col-4" >
+                            <div class="card" style=" border-radius: 0%; height: 100%;">
+                                <div class="card-body w-50">
+                                    <h5 class="card-title">contact list</h5>
+                                        <table class="table table-stripped" style="width: 100%;">
+                                            <tbody *ngFor="let friendList of activeUsers">
+                                                <span (click)="profile(friendList)"><img style="height: 40px; border-radius: 25px; width: 40px;" src={{friendList.img}} /></span>
+                                                <td (click)="setMessage(friendList)">{{friendList.userName}}</td>
+                                            </tbody>
+                                        </table>
+                                        <!-- <ul *ngFor="let friendList of activeUsers" >
+                                            <li (click)="setMessage(friendList)">{{friendList.userName}}</li>
+                                        </ul> -->
+                                        
+                                </div>
+                            </div>
+                        </div>
+                       <div class="col-8 " style="margin-left:-30px;">
+                        <div class="card" style="background-color: #FBFBFB; border-radius: 0%; height: 100%;">
+                            <div class="card-body">
+                                <app-chat [receive]="receiver"></app-chat>
+                            </div>
+                            <div><input class="form-control w-50" [(ngModel)]='mess' style="border-radius: 25px;" type="text"/>
+                                <button class="btn btn-success" style="margin-left: 400px; margin-top: -60px;" (click)="send()" ><span class="fa fa-reply"></span></button>
+                                
+                            </div>
+                        </div>
+                           
+                       </div>
+            
+            </div>
+
+        </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,40 @@
+<div *ngIf= "receive==''" style=" max-width: 60%;  float:left; 
+            background-color: #FFFFFF; border: 2px; border-radius: 5px;" (dblclick)="delete(chat)">
+        hello {{actUser[0].userName}} click on your friend to connect with them!!!
+        <small class="text-muted"></small>
+
+            </div><br><br>
+
+    
+        <div *ngFor="let i=index, let chat of myChats" >
+
+            
+
+            
+                
+            <div *ngIf= "chat.sender==receive" style=" max-width: 60%;  float:left; 
+                    background-color: #FFFFFF; border: 2px; border-radius: 5px;" (dblclick)="delete(chat)">
+                {{chat.message}}
+                <small class="text-muted">{{chat.time}}</small>
+
+            </div><br><br>
+
+
+            <div *ngIf="!(chat.sender==receive)"  style=" max-width: 60%; float:right;
+             background-color:#DFFCC9;   border-radius: 5px; " (dblclick)="delete(chat)" >
+                
+                
+                            {{chat.message}}
+                         <small class="text-muted">{{chat.time}}</small>
+                         <div *ngIf="chat.seen==false"><span class="fa fa-check"></span></div>
+                         <div *ngIf="chat.seen==true"><span class="fa fa-check"></span>
+                            <span class="fa fa-check"></span></div>
+
+            </div>
+            
+            
+            <br><br>  
+        </div>
+
+
+
