@@ -26,6 +26,14 @@ export class ChatService {
   }
 
 
+  public groupSource : BehaviorSubject<[]> = new BehaviorSubject(JSON.parse(localStorage.getItem('groupMessages')));
+  
+  
+  public updateGroupSource(nam){
+   
+    this.groupSource.next(nam);
+  }
+
 
   
 }

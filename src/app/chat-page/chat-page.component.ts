@@ -66,7 +66,7 @@ export class ChatPageComponent implements OnInit {
 
 
   setMessage(m){
-    
+   if(m!='group'){
     this.receiver= m.phone;
     this.friend=m
 
@@ -92,6 +92,13 @@ export class ChatPageComponent implements OnInit {
     console.log(this.imgPath)
      
 
+
+
+    
+   }else if(m==='group'){
+      this.receiver='group'
+   }
+    
     
 
   }
@@ -101,8 +108,13 @@ export class ChatPageComponent implements OnInit {
 
 
   send(){
+
     let d = new Date();
     let time = d.getHours() +':' + d.getUTCMinutes();
+    
+    if(this.receiver!='group'){
+      
+     
    
     //console.log(online)
    
@@ -115,6 +127,23 @@ export class ChatPageComponent implements OnInit {
 
    this.mess='';
 
+    }else if(this.receiver=='group'){
+        let group = JSON.parse(localStorage.getItem('groupMessages'));
+        let myChat = {sender:this.active.phone, receiver:'group', message:this.mess, time:time, seen:false};
+        if(group){
+          let mygroup = group;
+          mygroup=[...mygroup,myChat];
+          localStorage.setItem('groupMessages',JSON.stringify(mygroup));
+          this.chat.updateGroupSource(mygroup);
+        }else{
+          let mygroup=group;
+          mygroup =[...mygroup,myChat]
+          localStorage.setItem('groupMessages',JSON.stringify(mygroup));
+          this.chat.updateGroupSource(mygroup)
+        }
+        this.mess='';
+    }
+    
   }
 
 

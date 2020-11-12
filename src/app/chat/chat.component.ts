@@ -15,7 +15,7 @@ export class ChatComponent implements OnInit {
   public actUser=[];
   public myChats=[];
   public filterChat;
-  
+  public group=[];  
 
   @Input() receive='';
 ngOnInit(): void {
@@ -24,42 +24,77 @@ ngOnInit(): void {
    this.actUser = use;
   
   
-  this.Allchat.dataSource.subscribe(data =>{
-    this.chats = data;
-    let j = this.chats.filter(mes=>{
-      if ((mes.sender==this.actUser[0].phone&&mes.receiver==this.receive)||
-      (mes.sender==this.receive&&mes.receiver==this.actUser[0].phone)) {
-        return mes;
-        
-      }
-      else{
-        return null
-      }
+    this.Allchat.dataSource.subscribe(data =>{
+      this.chats = data;
+      let j = this.chats.filter(mes=>{
+        if ((mes.sender==this.actUser[0].phone&&mes.receiver==this.receive)||
+        (mes.sender==this.receive&&mes.receiver==this.actUser[0].phone)) {
+          return mes;
+          
+        }
+        else{
+          return null
+        }
+      })
+  
+      this.myChats=j;
+      
     })
 
-    this.myChats=j;
     
-  })
+    this.Allchat.groupSource.subscribe(data =>{
+      if(this.receive=='group'){
+      this.group = data;
+      this.myChats=data;
+      }
+
+        console.log(data)
+      })
+    
+  
+    
+      
+    
+    
+  
+      //this.myChats=j;
+      
+  
 
   
   }
 
    ngOnChanges(){
 
-    let j = this.chats.filter(mes=>{
-      if ((mes.sender==this.actUser[0].phone&&mes.receiver==this.receive)||
-      (mes.sender==this.receive&&mes.receiver==this.actUser[0].phone)) {
-        return mes;
+      if(this.receive!='group'){
+        let j = this.chats.filter(mes=>{
+          if ((mes.sender==this.actUser[0].phone&&mes.receiver==this.receive)||
+          (mes.sender==this.receive&&mes.receiver==this.actUser[0].phone)) {
+            return mes;
+            
+          }
+        })
+    
+        console.log(j);
+    
+        let l = j.map(mes=>mes.sender==this.receive)
+        console.log(l)
+    
+        this.myChats=j; 
+      }else if(this.receive=='group'){
+
+        this.Allchat.groupSource.subscribe(data =>{
+          this.group = data;
+          //this.myChats=data;
         
+    
+            console.log(data)
+          })
+          
+          this.myChats=this.group;
+          console.log(this.myChats)
       }
-    })
-
-    console.log(j);
-
-    let l = j.map(mes=>mes.sender==this.receive)
-    console.log(l)
-
-    this.myChats=j;    
+       
    }
 
 
