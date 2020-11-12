@@ -86,7 +86,7 @@ export class ChatPageComponent implements OnInit {
  
 
     this.display=true;
-    this.imgPath= 'assets/'+m.img;
+    this.imgPath= m.img;
     console.log(this.imgPath)
      
 

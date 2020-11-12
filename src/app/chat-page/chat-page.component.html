@@ -20,12 +20,12 @@
                     <div class="row col-12 p-3">
                         <div class="col-4" >
                             <div class="card" style=" border-radius: 0%; height: 100%;">
-                                <div class="card-body w-50">
-                                    <h5 class="card-title">contact list</h5>
-                                        <table class="table table-stripped" style="width: 100%;">
+                                <div class="card-body">
+                                    <h5 class="card-title">Contact list</h5>
+                                        <table class="table table-hover table-borderless  table-sm">
                                             <tbody *ngFor="let friendList of activeUsers">
-                                                <span (click)="profile(friendList)"><img style="height: 40px; border-radius: 25px; width: 40px;" src={{friendList.img}} /></span>
-                                                <td (click)="setMessage(friendList)">{{friendList.userName}}</td>
+                                                <tr><td (click)="profile(friendList)"><img style="height: 40px; border-radius: 25px; width: 40px;" src={{friendList.img}} /></td>
+                                                    <td (click)="setMessage(friendList)">{{friendList.userName}}</td></tr>
                                             </tbody>
                                         </table>
                                         <!-- <ul *ngFor="let friendList of activeUsers" >
