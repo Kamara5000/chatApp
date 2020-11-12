@@ -19,6 +19,8 @@ export class ChatPageComponent implements OnInit {
   public friend='';
   public display = false;
   public imgPath;
+  public filterText;
+  
 
   public chatSent;
   

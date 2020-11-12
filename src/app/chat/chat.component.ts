@@ -14,6 +14,7 @@ export class ChatComponent implements OnInit {
   public chats=[];
   public actUser=[];
   public myChats=[];
+  public filterChat;
   
 
   @Input() receive='';

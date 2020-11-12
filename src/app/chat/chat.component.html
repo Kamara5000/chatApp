@@ -1,3 +1,7 @@
+<div>
+    <input type="text" class="form-control bg-light w-25" style="border-radius: 30px; float: right; margin-top: -80px;" 
+                    placeholder="Search friend chat" [(ngModel)]="filterChat"/>
+</div>
 <div *ngIf= "receive==''" style=" max-width: 60%;  float:left; 
             background-color: #FFFFFF; border: 2px; border-radius: 5px;" (dblclick)="delete(chat)">
         hello {{actUser[0].userName}} click on your friend to connect with them!!!
@@ -6,7 +10,7 @@
             </div><br><br>
 
     
-        <div *ngFor="let i=index, let chat of myChats" >
+        <div *ngFor="let i=index, let chat of myChats |chat:filterChat" >
 
             
 

@@ -12,6 +12,8 @@ import { GroupChatComponent } from './group-chat/group-chat.component';
 import { ChatPageComponent } from './chat-page/chat-page.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { ChatComponent } from './chat/chat.component';
+import { FriendFilterPipe } from './pipes/friend-filter.pipe';
+import { ChatPipe } from './pipes/chat.pipe';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { ChatComponent } from './chat/chat.component';
     GroupChatComponent,
     ChatPageComponent,
     NotfoundComponent,
-    ChatComponent
+    ChatComponent,
+    FriendFilterPipe,
+    ChatPipe
   ],
   imports: [
     BrowserModule,
