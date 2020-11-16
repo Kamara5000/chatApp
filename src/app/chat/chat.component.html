@@ -4,7 +4,7 @@
 </div>
 <div *ngIf= "receive==''" style=" max-width: 60%;  float:left; 
             background-color: #FFFFFF; border: 2px; border-radius: 5px;" (dblclick)="delete(chat)">
-        hello {{actUser[0].userName}} click on your friend to connect with them!!!
+        hello {{actUser.userName}} click on your friend to connect with them!!!
         <small class="text-muted"></small>
 
             </div><br><br>
@@ -12,15 +12,13 @@
     
         <div *ngFor="let i=index, let chat of myChats |chat:filterChat" >
 
-            <div *ngIf= "chat.receiver=='group' && chat.sender!=actUser[0].phone" style=" max-width: 60%;  float:left; 
-                    background-color: #FFFFFF; border: 2px; border-radius: 5px;" (dblclick)="delete(chat)">
+            <div *ngIf= "chat.receiver=='group' && chat.sender!=actUser.phone" style=" max-width: 60%;  float:left; 
+                    background-color: #FFFFFF; border: 2px; border-radius: 5px;" (dblclick)="deleteGroup(chat)">
                 {{chat.sender}}<br>{{chat.message}}
                 <small class="text-muted">{{chat.time}}</small>
 
             </div><br>
             
-            
-    
             <div *ngIf= "chat.sender==receive" style=" max-width: 60%;  float:left; 
                     background-color: #FFFFFF; border: 2px; border-radius: 5px;" (dblclick)="delete(chat)">
                 {{chat.message}}
@@ -29,7 +27,7 @@
             </div><br><br>
 
 
-            <div *ngIf="chat.sender==actUser[0].phone"  style=" max-width: 60%; float:right;
+            <div *ngIf="chat.sender==actUser.phone"  style=" max-width: 60%; float:right;
              background-color:#DFFCC9;   border-radius: 5px; " (dblclick)="delete(chat)" >
                 
                 

@@ -12,23 +12,25 @@ export class ChatComponent implements OnInit {
 //public chat ={sender:"hello", senderTime:'17:23',  receiver:"how far my guy", receiverTime:"18:20"}
   public chat = {};
   public chats=[];
-  public actUser=[];
+  public actUser;
   public myChats=[];
   public filterChat;
-  public group=[];  
+  public group=[]; 
+  public users; 
 
   @Input() receive='';
 ngOnInit(): void {
 
    let use = JSON.parse(localStorage.getItem('activeUser'));
-   this.actUser = use;
+   this.actUser = use[0];
+   this.users= JSON.parse(localStorage.getItem('users'))
   
   
     this.Allchat.dataSource.subscribe(data =>{
       this.chats = data;
       let j = this.chats.filter(mes=>{
-        if ((mes.sender==this.actUser[0].phone&&mes.receiver==this.receive)||
-        (mes.sender==this.receive&&mes.receiver==this.actUser[0].phone)) {
+        if ((mes.sender==this.actUser.phone&&mes.receiver==this.receive)||
+        (mes.sender==this.receive&&mes.receiver==this.actUser.phone)) {
           return mes;
           
         }
@@ -68,8 +70,8 @@ ngOnInit(): void {
 
       if(this.receive!='group'){
         let j = this.chats.filter(mes=>{
-          if ((mes.sender==this.actUser[0].phone&&mes.receiver==this.receive)||
-          (mes.sender==this.receive&&mes.receiver==this.actUser[0].phone)) {
+          if ((mes.sender==this.actUser.phone&&mes.receiver==this.receive)||
+          (mes.sender==this.receive&&mes.receiver==this.actUser.phone)) {
             return mes;
             
           }
@@ -99,15 +101,31 @@ ngOnInit(): void {
 
 
    delete(c){
-    let j = this.chats.filter(mes=>{
+    if (c.receiver!='group') {
+      let j = this.chats.filter(mes=>{
+        if ((mes!==c)){
+          return mes;
+          
+        }
+      })
+        console.log(j);
+        localStorage.setItem('allMessages',JSON.stringify(j));
+        this.Allchat.updateSource(j);
+    }else if(c.receiver=='group'){
+      this.deleteGroup(c)
+    }
+  }
+
+  deleteGroup(c){
+    let s = this.group.filter(mes=>{
       if ((mes!==c)){
         return mes;
         
       }
     })
-      console.log(j);
-      localStorage.setItem('allMessages',JSON.stringify(j));
-      this.Allchat.updateSource(j);
+      console.log(s);
+      localStorage.setItem('groupMessages',JSON.stringify(s));
+      this.Allchat.updateGroupSource(s);
   }
 
 }

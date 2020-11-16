@@ -1,16 +1,21 @@
-<div class="row">
+<div class="row" style=" font-family: Arial, Helvetica, sans-serif;">
     <div class="col-12">
         <div class="row">
             <div style="background-color:#EFEFEF; width:100%; height:50px">
                 <div style="margin: 5px;">
-                   <span (click)="profile(active)"><img style="height: 40px; border-radius: 25px; width: 40px;" src="assets/ziyech.jpg" /></span>
+                   <span (click)="profile(active)"><img style="height: 40px; border-radius: 25px; width: 40px;" src={{active.img}} /></span>
                     {{active.fullName}}
                     <br><p  class="text-muted" style="margin-left: 50px; font-size: 10px; margin-top: -15px;">{{active.phone}}</p>
                     
-                    <div style="margin-left: 400px; margin-top: -55px;" *ngIf="display" >
+                    <div style="margin-left: 400px; margin-top: -55px;" *ngIf="display && receiver!='group'" >
                         <img (click)="profile(friend)" style="height: 40px; border-radius: 25px; width: 40px;" src="{{imgPath}}" />
                         {{friend.fullName}}
                         <br><p  class="text-muted" style="margin-left: 50px; font-size: 10px; margin-top: -15px;">{{friend.phone}}</p>
+                    </div>
+
+                    <div style="margin-left: 400px; margin-top: -55px;" *ngIf="receiver=='group'" >
+                        <img style="height: 40px; border-radius: 25px; width: 40px;" src="assets/group.png" />
+                        <small  class="text-muted">group chat</small>
                     </div>
                 
                    
@@ -29,14 +34,18 @@
                                         
                                         <table class="table table-hover table-borderless  table-sm">
                                             <tbody>
-                                                <tr><td (click)="profile()"><img style="height: 40px; border-radius: 25px; width: 40px;" src='assets/group.png' /></td>
-                                                    <td (click)="setMessage('group')">GENERAL GROUP CHAT</td></tr>
+                                                <tr><td><img style="height: 40px; border-radius: 25px; width: 40px;" src='assets/group.png' /></td>
+                                                    <td (click)="setMessage('group')">GENERAL GROUP CHAT <br><small class="text-muted">{{group.message}}</small></td></tr>
                                             </tbody>
                                         </table>
                                         <table class="table table-hover table-borderless  table-sm">
                                             <tbody *ngFor="let friendList of activeUsers |friendFilter:filterText">
                                                 <tr><td (click)="profile(friendList)"><img style="height: 40px; border-radius: 25px; width: 40px;" src={{friendList.img}} /></td>
-                                                    <td (click)="setMessage(friendList)">{{friendList.userName}}</td></tr>
+                                                    <td style="font-size: 15px;" (click)="setMessage(friendList)">{{friendList.fullName|uppercase}}</td></tr>
+                                                    <td  >
+                                                        <small class="text-muted">{{friendList.message}}</small>
+
+                                                    </td>
                                             </tbody>
                                         </table>
                                         <!-- <ul *ngFor="let friendList of activeUsers" >

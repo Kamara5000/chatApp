@@ -20,6 +20,9 @@ export class ChatPageComponent implements OnInit {
   public display = false;
   public imgPath;
   public filterText;
+  public groupMessage=[];
+  public group;
+  
   
 
   public chatSent;
@@ -29,9 +32,24 @@ export class ChatPageComponent implements OnInit {
       let users = JSON.parse(localStorage.getItem('users'));
       let online = JSON.parse(localStorage.getItem('activeUser'));
       this.active = online[0];
+      this.active.img=  'assets/'+this.active.img;
       let myFriend = users.filter(user=>user.phone !==this.active.phone);
+      // let mygroup= JSON.parse(localStorage.getItem('groupMessages'));
+      // this.groupMessage= mygroup;
+      // //console.log(this.groupMessage)
+      //   this.group=this.groupMessage[this.groupMessage.length-1];
+      // this.groupMessage.filter(mes=>{
+      //   console.log(this.groupMessage.length-1)
+      // })
+      
+      this.chat.groupSource.subscribe(data =>{
+        //this.chatSent = data;
+        this.group=data[data.length-1]
 
-      this.activeUsers=myFriend;
+      })
+      
+     
+        this.activeUsers=myFriend;
       
       this.activeUsers.forEach((user)=>{
 
@@ -59,7 +77,26 @@ export class ChatPageComponent implements OnInit {
         this.chat.dataSource.subscribe(data =>{
         this.chatSent = data;
 
+        this.activeUsers.forEach((user)=>{
+          data.filter(mes=>{
+            if ((mes.sender==this.active.phone&&mes.receiver==user.phone)||
+            (mes.sender==user.phone&&mes.receiver==this.active.phone)) {
+              user.message= mes.message;
+              console.log(user)
+              
+            }
+            else{
+              return null
+            }
+           })
+        })
+
       })
+
+     
+
+
+
 
       
   }

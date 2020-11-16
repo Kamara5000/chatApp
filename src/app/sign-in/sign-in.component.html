@@ -6,23 +6,24 @@
                     <div class="row col-12 p-3">
                         <div class="col-4" >
                             <div class="card" style="background-color: #009688; border-radius: 0%; height: 100%;">
-                                <div class="card-body w-50">
+                                <div class="card-body w-50 text-light">
                                     <h5 class="card-title">Sign In</h5>
                                     <p class="card-text">Welcome to the chatApp <br/>
                                         connect with friends and family.</p>
                                     <h5 class="card-title">ON THE GO </h5>
+                                    <div style="margin-left: 120px; margin-top: 120px;"><span class="fa fa-comment fa-4x"></span></div>
                                         
                                 </div>
                             </div>
                         </div>
                        <div class="col-8 " style="margin-left:-30px;">
                         <div class="card" style="background-color: #FBFBFB; border-radius: 0%; height: 100%;">
-                            <div class="card-body">
+                            <div class="card-body" style="margin-left:230px; margin-top: 100px;">
                                 <form [formGroup]="userForm" >
                                     <div >
                                         <input type="text"  #inp [class.is-invalid]="userForm.get('phone').dirty && userForm.get('phone').invalid"
                                          name="phone" [class.is-valid]="userForm.get('phone').dirty && userForm.get('phone').valid" 
-                                         formControlName="phone" class="form-control"  placeholder="phone number">
+                                         formControlName="phone" class="form-control w-50"  placeholder="phone number">
                                         <div *ngIf="userForm.get('phone').invalid" >
                                             <span class="text-danger" *ngIf="userForm.get('phone').dirty && userForm.get('phone').errors.numErr" >
                                                 must contain only number</span>
