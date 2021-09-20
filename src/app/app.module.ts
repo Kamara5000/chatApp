@@ -14,6 +14,9 @@ import { NotfoundComponent } from './notfound/notfound.component';
 import { ChatComponent } from './chat/chat.component';
 import { FriendFilterPipe } from './pipes/friend-filter.pipe';
 import { ChatPipe } from './pipes/chat.pipe';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -27,13 +30,16 @@ import { ChatPipe } from './pipes/chat.pipe';
     NotfoundComponent,
     ChatComponent,
     FriendFilterPipe,
-    ChatPipe
+    ChatPipe,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatSidenavModule
   ],
   providers: [],
   bootstrap: [AppComponent]

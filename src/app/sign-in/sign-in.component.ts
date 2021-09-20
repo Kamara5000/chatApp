@@ -12,6 +12,7 @@ export class SignInComponent implements OnInit {
   constructor(public fb: FormBuilder, public router: Router ) { }
 
   public userLog=[];
+  public err = '';
   public userForm= this.fb.group({
     phone:['080',[Validators.maxLength(11), this.validatephone]]
   });
@@ -59,13 +60,13 @@ export class SignInComponent implements OnInit {
               localStorage.setItem('activeUser', JSON.stringify(m));
               this.router.navigate([`/chatpage`])
             }else{
-              alert('user not found')
+              this.err = 'user not found';
             }
          
               }
               
         else{
-          alert('please enter a valid number')
+          this.err = 'please enter a valid number';
         }
   }
 

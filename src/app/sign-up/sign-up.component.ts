@@ -12,7 +12,7 @@ export class SignUpComponent implements OnInit {
   constructor(public fb:FormBuilder, public router: Router) { }
 
   public userNew=[] ;
-  
+  public err=  '';
   public userForm= this.fb.group({
     fullName:['',[this.validateName, Validators.maxLength(40)]],
     address:['' ,[Validators.maxLength(200)]],
@@ -109,11 +109,11 @@ export class SignUpComponent implements OnInit {
           let m = this.userNew.filter((u,i)=>u.phone==user.phone);
           console.log(this.userNew)
             if (m.length>0) {
-              alert('users with phone number exist')
+              this.err = 'users with phone number exist';
             }else{
               this.userNew=[...this.userNew,user];
             localStorage.setItem('users',JSON.stringify(this.userNew));
-            alert('you have succesfully register sign in to connect with friends')
+            this.err = 'you have succesfully register sign in to connect with friends';
             this.userForm.setValue({fullName:"", address:"", userName:"", email:"", phone:"", img:""});
             this.router.navigate([`/signin`])
             }
@@ -121,7 +121,7 @@ export class SignUpComponent implements OnInit {
               }
               
         else{
-          alert('please submit a valid form')
+          this.err = 'please submit a valid form';
         }
   }
 

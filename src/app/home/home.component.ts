@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(public router: Router) { }
 
   public img;
   ngOnInit(): void {
@@ -19,5 +20,14 @@ let k = this.img.replace("C:\\fakepath\\", "");
  //this.img = this.img.slice();
   console.log(k)
 }
+
+
+
+  // log(){
+  //   localStorage.removeItem('activeUser'); 
+  //  this.router.navigate([`/home`]);
+  //   // return window.location.href='/home';
+
+  // }
 
 }

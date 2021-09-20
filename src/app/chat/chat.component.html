@@ -1,9 +1,12 @@
 <div>
-    <input type="text" class="form-control bg-light w-25" style="border-radius: 30px; float: right; margin-top: -80px;" 
-                    placeholder="Search friend chat" [(ngModel)]="filterChat"/>
+    <input type="text" class="form-control bg-light w-25" style="border-radius: 30px; 
+    float: right; margin-top: -65px; margin-right: 30px;" 
+    placeholder="Search friend chat" [(ngModel)]="filterChat"/>
+    
 </div>
 <div *ngIf= "receive==''" style=" max-width: 60%;  float:left; 
-            background-color: #FFFFFF; border: 2px; border-radius: 5px;" (dblclick)="delete(chat)">
+            background-color: #07f707; border: 2px; border-radius: 5px; color: black;
+            padding: 4px;" (dblclick)="delete(chat)">
         hello {{actUser.userName}} click on your friend to connect with them!!!
         <small class="text-muted"></small>
 
@@ -13,34 +16,34 @@
         <div *ngFor="let i=index, let chat of myChats |chat:filterChat" >
 
             <div *ngIf= "chat.receiver=='group' && chat.sender!=actUser.phone" style=" max-width: 60%;  float:left; 
-                    background-color: #FFFFFF; border: 2px; border-radius: 5px;" (dblclick)="deleteGroup(chat)">
+                    background-color: #FFFFFF; padding: 4px; color: black; border: 2px; border-radius: 5px;" (dblclick)="deleteGroup(chat)">
                 {{chat.sender}}<br>{{chat.message}}
                 <small class="text-muted">{{chat.time}}</small>
 
             </div><br>
             
             <div *ngIf= "chat.sender==receive" style=" max-width: 60%;  float:left; 
-                    background-color: #FFFFFF; border: 2px; border-radius: 5px;" (dblclick)="delete(chat)">
+                    background-color:  #ffffff;  padding: 4px; color: black; border: 2px; border-radius: 5px;" (dblclick)="delete(chat)">
                 {{chat.message}}
                 <small class="text-muted">{{chat.time}}</small>
 
-            </div><br><br>
+            </div><br>
 
 
             <div *ngIf="chat.sender==actUser.phone"  style=" max-width: 60%; float:right;
-             background-color:#DFFCC9;   border-radius: 5px; " (dblclick)="delete(chat)" >
+             background-color:#a3f366; padding: 4px; color: black;   border-radius: 5px; " (dblclick)="delete(chat)" >
                 
                 
                             {{chat.message}}
                          <small class="text-muted">{{chat.time}}</small>
-                         <div *ngIf="chat.seen==false"><span class="fa fa-check"></span></div>
-                         <div *ngIf="chat.seen==true"><span class="fa fa-check"></span>
-                            <span class="fa fa-check"></span></div>
+                         <div *ngIf="chat.seen==false"><span class="fa fa-check text-muted"></span></div>
+                         <div *ngIf="chat.seen==true"><span class="fa fa-check text-primary"></span>
+                            <span class="fa fa-check text-primary"></span></div>
 
             </div>
             
             
-            <br><br>  
+            <br>  
         </div>
 
 

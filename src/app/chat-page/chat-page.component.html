@@ -1,76 +1,165 @@
-<div class="row" style=" font-family: Arial, Helvetica, sans-serif;">
-    <div class="col-12">
-        <div class="row">
-            <div style="background-color:#EFEFEF; width:100%; height:50px">
-                <div style="margin: 5px;">
-                   <span (click)="profile(active)"><img style="height: 40px; border-radius: 25px; width: 40px;" src={{active.img}} /></span>
-                    {{active.fullName}}
-                    <br><p  class="text-muted" style="margin-left: 50px; font-size: 10px; margin-top: -15px;">{{active.phone}}</p>
+<!-- <mat-sidenav-container>
+    <mat-sidenav mode="over" #sidenav><app-profile></app-profile>
+        <button (click)="sidenav.toggle()">toggle</button></mat-sidenav>
+    <mat-sidenav-content>main
+        
+        <button (click)="sidenav.toggle()">toggle</button>
+    </mat-sidenav-content>
+</mat-sidenav-container>
+ -->
+
+
+ 
+<div class="container">
+    <mat-sidenav-container style="background:none;">
+        <mat-sidenav mode="push" class="w-25" style="height: 100%;"  #sidenav [(opened)]="opened">
+            <!-- <app-profile [pPhone]="profilePhone" ></app-profile>
+                <button (click)="sidenav.toggle()">toggle</button> -->
+                <div class="card" style="height: 100%;" *ngIf="num!=''" >
+                    <div style="background-color: #009688; width: 100%; height: 80px;">
+                        <div style="margin-left: 50px; margin-top: 50px; color: white;">
+                            <button class="" style="margin-left: -50px; background: none; border: none; outline: none;" (click)='opened=!opened'>
+                                <span  class="fa fa-arrow-left  text-white"></span></button>
+                            Profile</div> 
+                    </div>
+                    <div style=" background-color: #E5E5E5; width: 100%;">
+                       <div   style="height: 200px; margin-left: 30px; margin-top: 20px; 
+                       margin-bottom: 20px; border-radius: 100px; width: 200px;">
+                        <img  src="{{profile.img}}" style="height: 200px; border-radius: 100px; width: 200px;">
+                       </div>
+                    </div>
                     
-                    <div style="margin-left: 400px; margin-top: -55px;" *ngIf="display && receiver!='group'" >
-                        <img (click)="profile(friend)" style="height: 40px; border-radius: 25px; width: 40px;" src="{{imgPath}}" />
-                        {{friend.fullName}}
-                        <br><p  class="text-muted" style="margin-left: 50px; font-size: 10px; margin-top: -15px;">{{friend.phone}}</p>
-                    </div>
-
-                    <div style="margin-left: 400px; margin-top: -55px;" *ngIf="receiver=='group'" >
-                        <img style="height: 40px; border-radius: 25px; width: 40px;" src="assets/group.png" />
-                        <small  class="text-muted">group chat</small>
-                    </div>
+                    <div>
                 
-                   
-                </div>
-            </div>
-            <div class="col-12" style="height: 82vh">
+                        <table class="table table-hover table-sm" >
+                            <tbody>
+                                <tr><td>Your name</td> <td>{{profile.fullName}}</td></tr>
+                                <tr><td>Username</td><td>{{profile.userName}}</td></tr>
+                                <tr class="bg-success"><td>Phone number</td><td>{{profile.phone}}</td></tr>
+                                <tr><td>Address</td><td>{{profile.address}}</td></tr>
+                                <tr><td>Email</td><td>{{profile.email}}</td></tr>
+                                <tr class="bg-light"><td>Bio</td><td>be kind </td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                </div>  
+            
+        </mat-sidenav>
+      
+           
+    
+     <mat-sidenav-content style="height: 100%;">       
+             <div class="row no-gutters" style=" font-family: Arial, Helvetica, sans-serif;">
+                    <div class="col-sm-12" style="background-color:#EFEFEF;height:50px">
                         
-                    <div class="row col-12 p-3">
-                        <div class="col-4" >
-                            <div class="card" style=" border-radius: 0%; height: 100%;">
-                                
-                                <div class="card-body">
-                                    <h5 class="card-title" >
-                                        <input type="text" class="form-control bg-light" style="border-radius: 30px;" 
-                                        placeholder="Search friend list" [(ngModel)]="filterText"/></h5>
-                                        
-                                        <table class="table table-hover table-borderless  table-sm">
-                                            <tbody>
-                                                <tr><td><img style="height: 40px; border-radius: 25px; width: 40px;" src='assets/group.png' /></td>
-                                                    <td (click)="setMessage('group')">GENERAL GROUP CHAT <br><small class="text-muted">{{group.message}}</small></td></tr>
-                                            </tbody>
-                                        </table>
-                                        <table class="table table-hover table-borderless  table-sm">
-                                            <tbody *ngFor="let friendList of activeUsers |friendFilter:filterText">
-                                                <tr><td (click)="profile(friendList)"><img style="height: 40px; border-radius: 25px; width: 40px;" src={{friendList.img}} /></td>
-                                                    <td style="font-size: 15px;" (click)="setMessage(friendList)">{{friendList.fullName|uppercase}}</td></tr>
-                                                    <td  >
-                                                        <small class="text-muted">{{friendList.message}}</small>
-
-                                                    </td>
-                                            </tbody>
-                                        </table>
-                                        <!-- <ul *ngFor="let friendList of activeUsers" >
-                                            <li (click)="setMessage(friendList)">{{friendList.userName}}</li>
-                                        </ul> -->
-                                        
+                        
+                            
+                        
+                                <span (click)="checkProfile(active)">
+                                    <img style="height: 40px; border-radius: 25px; width: 40px;" src={{active.img}} />
+                                </span>
+                                    <span style="font-weight:bolder">{{active.fullName}}</span>
+                                    <br><p  class="text-muted" style="margin-left: 50px; font-size: 10px; margin-top: -15px;">
+                                        {{active.phone}}</p>
+                        
+                            <div  style="margin-left: 400px; margin-top: -55px;" *ngIf="display && receiver!='group'" >
+                                <img (click)="checkProfile(friend)" style="height: 40px; border-radius: 25px; width: 40px;" src="{{imgPath}}" />
+                                {{friend.fullName}}
+                                <br><p  class="text-muted" style="margin-left: 50px; font-size: 10px; margin-top: -15px;">{{friend.phone}}</p>
+                            </div>
+    
+                            <div style="margin-left: 400px; margin-top: -55px;" *ngIf="receiver=='group'" >
+                            <img style="height: 40px; border-radius: 25px; width: 40px;" src="assets/group.png" />
+                            <small  class="text-muted">group chat</small>
+                            </div>
+                        
+                            <div class="dropdown dropleft" style="float: right; margin-top: -60px;">
+                                <button type="button" class="btn" data-toggle="dropdown">
+                              <span class="fa fa-bars fa-2x"></span>
+                                </button>
+                                <div class="dropdown-menu bg-light">
+                
+                                    <ul>
+                                         <li class="dropdown-item"><a href="/home">Home</a></li>
+                                         <li class="dropdown-item"><a href="/home">About</a></li>
+                                        <li class="dropdown-item"><a href="/home">Settings</a></li>
+                                        <li class="dropdown-item" style="margin-left: -12px;">
+                                        <button class="btn text-primary" (click)="log()">Signout </button></li>
+                                    </ul>
+                              
+                                </div>
+                           </div>
+                    </div>   
+                    
+                </div>
+                
+                <div class="row no-gutters" style="height: 82vh">
+                        
+                            <div class="col-sm-4" >
+                                <div class="card" style=" border-radius: 0%; height: 100%;">
+                                    
+                                    <div class="card-body">
+                                        <h5 class="card-title" >
+                                            <input type="text" class="form-control bg-light" style="border-radius: 30px;" 
+                                            placeholder="Search friend list" [(ngModel)]="filterText"/>
+                                        </h5>
+                                            
+                                            <table class="table table-hover table-borderless  table-sm">
+                                                <tbody>
+                                                    <tr><td><img style="height: 40px; border-radius: 25px; width: 40px;" src='assets/group.png' /></td>
+                                                        <td (click)="setMessage('group')">GENERAL GROUP CHAT <br
+                                                            ><small class="text-muted">{{group.message}}</small></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <table class="table table-hover table-borderless  table-sm">
+                                                <tbody *ngFor="let friendList of activeUsers |friendFilter:filterText">
+                                                    <tr><td (click)="checkProfile(friendList)"><img style="height: 40px; border-radius: 25px; width: 40px;" src={{friendList.img}} /></td>
+                                                        <td style="font-size: 15px;" (click)="setMessage(friendList)">{{friendList.fullName|uppercase}}</td></tr>
+                                                        <td style="max-width: 5px;" class="text-muted  text-truncate "  >
+                                                            <small>{{friendList.message}}</small>
+    
+                                                        </td>
+                                                </tbody>
+                                            </table>
+    
+                                            
+                                    </div>
+                                </div>
+                            </div> 
+                         
+                            <div class="col-sm-8 ">
+                                <div class="card" style="background-color: #FBFBFB; border-radius: 0%; height: 100%; ">
+                                    <div class="card-body">
+                                         <app-chat [receive]="receiver"></app-chat>
+                                    </div>
+                                    <div class="d-flex mb-5 ml-5"><textarea class="form-control w-50" [(ngModel)]='mess' style="border-radius: 25px;" type="text"></textarea>
+                                            
+                                            <button class="btn btn-success ml-5" style="" (click)="send()" >
+                                                <span class="fa fa-reply"></span>
+                                            </button>
+                                    
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                       <div class="col-8 " style="margin-left:-30px;">
-                        <div class="card" style="background-color: #FBFBFB; border-radius: 0%; height: 100%;">
-                            <div class="card-body">
-                                <app-chat [receive]="receiver"></app-chat>
-                            </div>
-                            <div><input class="form-control w-50" [(ngModel)]='mess' style="border-radius: 25px;" type="text"/>
-                                <button class="btn btn-success" style="margin-left: 400px; margin-top: -60px;" (click)="send()" ><span class="fa fa-reply"></span></button>
-                                
-                            </div>
-                        </div>
-                           
-                       </div>
+                
+                        
+                </div>
+    
             
-            </div>
-
-        </div>
-        </div>
-    </div>
+          
+    
+        </mat-sidenav-content> 
+    </mat-sidenav-container>
+    
 </div>
+
+
+
+
+
+
+
+
+

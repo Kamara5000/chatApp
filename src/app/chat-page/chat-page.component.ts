@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ChatService } from '../services/chat.service';
 
+
 @Component({
   selector: 'app-chat-page',
   templateUrl: './chat-page.component.html',
@@ -11,6 +12,8 @@ export class ChatPageComponent implements OnInit {
 
   constructor(public chat:ChatService, public router: Router) { }
 
+  public opened=false;
+  public num='';
   public activeUsers=[];
   public AllMessages=[];
   public receiver='';
@@ -22,7 +25,11 @@ export class ChatPageComponent implements OnInit {
   public filterText;
   public groupMessage=[];
   public group;
+  public profile;
+
+
   
+
   
 
   public chatSent;
@@ -78,7 +85,7 @@ export class ChatPageComponent implements OnInit {
         this.chatSent = data;
 
         this.activeUsers.forEach((user)=>{
-          data.filter(mes=>{
+          this.chatSent.filter(mes=>{
             if ((mes.sender==this.active.phone&&mes.receiver==user.phone)||
             (mes.sender==user.phone&&mes.receiver==this.active.phone)) {
               user.message= mes.message;
@@ -184,8 +191,32 @@ export class ChatPageComponent implements OnInit {
   }
 
 
-  profile(p){
-    this.router.navigate([`/profile/${p.phone}`])
+  // profile(p){
+  //   this.opened= !this.opened;
+  //   this.router.navigate([`/profile/${p.phone}`])
+  // }
+
+  checkProfile(p){
+      this.opened= !this.opened;
+      let user = JSON.parse(localStorage.getItem('users'));
+      console.log(user);
+      this.num = p.phone;
+    
+      console.log(p);
+      let myUser= user.filter(user=>user.phone==this.num);
+    this.profile=myUser[0];
+    console.log(this.profile);
+    this.profile.img= 'assets/'+this.profile.img;
+    
+  }
+  
+
+
+  log(){
+    localStorage.removeItem('activeUser'); 
+   this.router.navigate([`/home`]);
+    // return window.location.href='/home';
+
   }
 
 
